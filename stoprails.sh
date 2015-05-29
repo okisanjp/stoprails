@@ -1,15 +1,22 @@
 #!/bin/sh -eu
 
+# railsプロジェクト配下にあるはずのpidファイル
 PIDFILE="tmp/pids/server.pid"
 
+# pidファイルの存在をチェック
 if [ -e $PIDFILE ]; then
+  # ファイルの中にpidが入ってます
   SERVER_PID=`cat $PIDFILE`
+  # 現在位置
   PWD=`pwd`
+  # 一応確認する
   if [ `uname` = "Darwin" ]; then
+    # Mac対応（泣）
     /bin/echo -n "[$PWD] Are you sure you want to exit the server? [y/n] > "
   else
     echo -n "[$PWD] Are you sure you want to exit the server? [y/n] > "
   fi
+  # y:終了 n:キャンセル それ以外:入力待ちへ
   while :
   do
     read INPUT
@@ -23,6 +30,7 @@ if [ -e $PIDFILE ]; then
     esac
   done
 else
+  # pidファイルがなければエラーとして終了
   echo "$PIDFILE file not exists." 1>&2
   exit 1
 fi
