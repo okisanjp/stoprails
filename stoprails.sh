@@ -22,9 +22,9 @@ if [ -e $PIDFILE ]; then
     read INPUT
     case "$INPUT" in
       "y" ) kill $SERVER_PID
-            echo "Stopped WEBRick"
+            echo `date '+%Y/%m/%d %T'`"\tStopped WEBRick"
             break ;;
-      "n" ) echo "Canceled."
+      "n" ) echo `date '+%Y/%m/%d %T'`"\tCanceled."
             break ;;
       * )   echo "[y/n]" ;;
     esac
